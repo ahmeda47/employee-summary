@@ -4,7 +4,6 @@ class App{
     const fs = require('fs');
     const util = require('util');
     const writeFileAsync = util.promisify(fs.writeFile);
-    const appendFileAsync = util.promisify(fs.readFile)
     const generateHTML = require('./output/html')
     const HTML = new generateHTML;
     
@@ -47,18 +46,3 @@ new App()
 
 
 module.exports = App;
-
-// .then(function(res){
-//     createHTML(res)
-//         function createHTML(){
-//             const newHTML = HTML.generateHTML(res)
-//             writeFileAsync(`${res.role}.html`, newHTML)
-//             .then(function(){
-//                 console.log('wrote data to file')
-//             })
-//         }
-// }).catch(function(err){
-//     if (err){
-//         console.log(err);
-//     }
-// })
