@@ -1,8 +1,13 @@
-const inquirer = require('inquirer');
-const fs = require('fs');
-const util = require('util');
-const writeFileAsync = util.promisify(fs.writeFile);
-
+class App{
+    constructor(){
+    const inquirer = require('inquirer');
+    const fs = require('fs');
+    const util = require('util');
+    const writeFileAsync = util.promisify(fs.writeFile);
+    const appendFileAsync = util.promisify(fs.readFile)
+    const generateHTML = require('./output/html')
+    const HTML = new generateHTML;
+    
         inquirer.prompt([
             {
                 name: 'name',
@@ -28,14 +33,32 @@ const writeFileAsync = util.promisify(fs.writeFile);
             },
         
         ]).then(function(res){
-            console.log(res)
-            //write file here...
-            writeFileAsync(`${res.role}.html`, JSON.stringify(res))
-            .then(function(){
-                console.log('wrote data to file')
-            })
+            const newHTML = HTML.generateHTML(res)            
+            writeFileAsync(`${res.name}.html`, newHTML)
         }).catch(function(err){
             if (err){
-                console.log(err);
+                console.log(err)
             }
         })
+    }
+}
+
+new App()
+
+
+module.exports = App;
+
+// .then(function(res){
+//     createHTML(res)
+//         function createHTML(){
+//             const newHTML = HTML.generateHTML(res)
+//             writeFileAsync(`${res.role}.html`, newHTML)
+//             .then(function(){
+//                 console.log('wrote data to file')
+//             })
+//         }
+// }).catch(function(err){
+//     if (err){
+//         console.log(err);
+//     }
+// })
