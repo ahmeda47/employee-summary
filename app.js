@@ -28,8 +28,9 @@ class App{
                 name: 'role',
                 type: 'list',
                 message: 'what is your role?',
-                choices:['Employee', 'Intern', 'Engineer', 'Manager']
-            },
+                choices:['Employee', 'Intern', 'Engineer', 'Manager'],
+                //when:
+            }
         
         ]).then(function(res){
             const newHTML = HTML.generateHTML(res)            
